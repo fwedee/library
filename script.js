@@ -1,3 +1,7 @@
+// Array which contains all books
+const myLibrary = [];
+
+// Constructor for book objects
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -14,6 +18,10 @@ function Book(title, author, pages, read) {
   };
 }
 
-const theHobbit = new Book("The Hobbit", "J.R.R Tolkien", 295, false);
+function addBookToLibrary() {
+  // do stuff here
+}
 
-console.log(theHobbit.info());
+// test books
+const theHobbit = new Book("The Hobbit", "J.R.R Tolkien", 295, false);
+myLibrary.push(theHobbit);
