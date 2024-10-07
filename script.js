@@ -18,10 +18,28 @@ function Book(title, author, pages, read) {
   };
 }
 
-function addBookToLibrary() {
-  // do stuff here
+function addBookToLibrary() {}
+
+function displayBooks() {
+  const books = document.querySelector("#books");
+
+  myLibrary.forEach((book) => {
+    let newRow = document.createElement("tr");
+
+    for (const key of Object.keys(book)) {
+      if (key == "info") {
+        continue;
+      }
+      let newCell = document.createElement("td");
+      newCell.innerText = `${book[key]}`;
+      newRow.appendChild(newCell);
+    }
+    books.appendChild(newRow);
+  });
 }
 
 // test books
 const theHobbit = new Book("The Hobbit", "J.R.R Tolkien", 295, false);
 myLibrary.push(theHobbit);
+
+displayBooks();
