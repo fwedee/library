@@ -1,6 +1,21 @@
 // Array which contains all books
 const myLibrary = [];
 
+// EventListener to get book inputs
+const addBook = document
+  .getElementById("addBook")
+  .addEventListener("click", addBookToLibrary);
+
+// Input-Fields
+
+const bookTitle = document.querySelector("#bookTitle");
+const bookAuthor = document.querySelector("#bookAuthor");
+const bookPages = document.querySelector("#bookPages");
+const bookRead = document.querySelector("#bookRead");
+
+// Table for all books
+const booksTable = document.querySelector("#books");
+
 // Constructor for book objects
 function Book(title, author, pages, read) {
   this.title = title;
@@ -18,11 +33,20 @@ function Book(title, author, pages, read) {
   };
 }
 
-function addBookToLibrary() {}
+// Adds values of input fields to the myLibrary array
+function addBookToLibrary() {
+  let book = new Book(
+    bookTitle.value,
+    bookAuthor.value,
+    bookPages.value,
+    bookRead.checked
+  );
+  myLibrary.push(book);
+  displayBooks();
+}
 
+// Add all Books from the myLibrary array to the html table
 function displayBooks() {
-  const books = document.querySelector("#books");
-
   myLibrary.forEach((book) => {
     let newRow = document.createElement("tr");
 
@@ -34,7 +58,7 @@ function displayBooks() {
       newCell.innerText = `${book[key]}`;
       newRow.appendChild(newCell);
     }
-    books.appendChild(newRow);
+    booksTable.appendChild(newRow);
   });
 }
 
@@ -42,4 +66,5 @@ function displayBooks() {
 const theHobbit = new Book("The Hobbit", "J.R.R Tolkien", 295, false);
 myLibrary.push(theHobbit);
 
+// Display books which are already in the array
 displayBooks();

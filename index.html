@@ -9,10 +9,17 @@
   </head>
   <body>
     <h1>Library</h1>
+    <h2>Add new book</h2>
     <form action="">
-      <label for="addBook">Add book:</label>
-      <input type="text" id="addBook" />
-      <button>NEW Book</button>
+      <label for="bookTitle">Title:</label>
+      <input type="text" id="bookTitle" />
+      <label for="bookAuthor">Author:</label>
+      <input type="text" id="bookAuthor" />
+      <label for="bookPages">Number of Pages:</label>
+      <input type="number" id="bookPages" />
+      <label for="bookRead">Already finished? </label>
+      <input type="checkbox" id="bookRead" />
+      <button id="addBook">NEW Book</button>
     </form>
     <main>
       <div class="container">
@@ -22,16 +29,6 @@
             <td>Author</td>
             <td>Pages</td>
             <td>Read</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
           </tr>
         </table>
       </div>
