@@ -45,6 +45,10 @@ function addBookToLibrary() {
   displayBooks();
 }
 
+
+
+
+
 // Add all Books from the myLibrary array to the html table
 function displayBooks() {
   myLibrary.forEach((book) => {
