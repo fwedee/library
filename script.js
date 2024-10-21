@@ -67,11 +67,11 @@ function clearBooks() {
   }
   let newRow = document.createElement("tr");
 
-  const cellData = ["Title", "Author", "Pages", "Read"];
+  const cellData = ["Title", "Author", "Pages", "Read", "Edit"];
 
   // Function to create and append a td element
   function createAndAppendCell(row, text) {
-    let cell = document.createElement("td");
+    let cell = document.createElement("th");
     cell.innerText = text;
     row.appendChild(cell);
   }
