@@ -1,10 +1,13 @@
 // Array which contains all books
-const myLibrary = [];
+let myLibrary = [];
 
 // EventListener to get book inputs
 const addBook = document
   .getElementById("addBook")
-  .addEventListener("click", addBookToLibrary);
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    addBookToLibrary();
+  });
 
 // Input-Fields
 
@@ -42,18 +45,50 @@ function addBookToLibrary() {
     bookRead.checked
   );
   myLibrary.push(book);
+  clearBooks();
   displayBooks();
 }
 
+function readBook(parentId) {
+  myLibrary[parentId].read = true;
+  clearBooks();
+  displayBooks();
+}
 
+function deleteBook(parentId) {
+  myLibrary.splice(parentId, 1);
+  clearBooks();
+  displayBooks();
+}
 
+function clearBooks() {
+  while (booksTable.hasChildNodes()) {
+    booksTable.removeChild(booksTable.firstChild);
+  }
+  let newRow = document.createElement("tr");
 
+  const cellData = ["Title", "Author", "Pages", "Read"];
+
+  // Function to create and append a td element
+  function createAndAppendCell(row, text) {
+    let cell = document.createElement("td");
+    cell.innerText = text;
+    row.appendChild(cell);
+  }
+
+  // Loop through the cell data and create cells
+  cellData.forEach((data) => createAndAppendCell(newRow, data));
+
+  booksTable.appendChild(newRow);
+}
 
 // Add all Books from the myLibrary array to the html table
 function displayBooks() {
+  let counter = 0;
   myLibrary.forEach((book) => {
     let newRow = document.createElement("tr");
-
+    newRow.setAttribute("id", counter);
+    counter += 1;
     for (const key of Object.keys(book)) {
       if (key == "info") {
         continue;
@@ -62,6 +97,27 @@ function displayBooks() {
       newCell.innerText = `${book[key]}`;
       newRow.appendChild(newCell);
     }
+
+    let delButton = document.createElement("button");
+    delButton.classList.add("delButton");
+    delButton.innerHTML = "delete";
+    newRow.appendChild(delButton);
+
+    const parentId = delButton.parentElement.id;
+
+    delButton.addEventListener("click", function () {
+      deleteBook(parentId);
+    });
+
+    let readButton = document.createElement("button");
+    readButton.classList.add("readButton");
+    readButton.innerHTML = "read";
+    newRow.appendChild(readButton);
+
+    readButton.addEventListener("click", function () {
+      readBook(parentId);
+    });
+
     booksTable.appendChild(newRow);
   });
 }
