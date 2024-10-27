@@ -19,13 +19,15 @@ const bookRead = document.querySelector("#bookRead");
 // Table for all books
 const booksTable = document.querySelector("#books");
 
-// Constructor for book objects
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.info = function () {
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  info() {
     const upperString =
       this.title + " by " + this.author + ", " + this.pages + " pages, ";
     if (this.read) {
@@ -33,7 +35,7 @@ function Book(title, author, pages, read) {
     } else {
       return upperString + "not read yet";
     }
-  };
+  }
 }
 
 // Adds values of input fields to the myLibrary array
