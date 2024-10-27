@@ -1,5 +1,5 @@
 # library
-A small small library-programm  in JavaScript.
+A small library-programm  in JavaScript.
 
 This is the first project task of the odin-projects-javascripts course.
 
