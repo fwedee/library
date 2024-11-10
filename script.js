@@ -6,7 +6,9 @@ const addBook = document
   .getElementById("addBook")
   .addEventListener("click", function (event) {
     event.preventDefault();
-    addBookToLibrary();
+    if (inputValidation()) {
+      addBookToLibrary();
+    }
   });
 
 // Input-Fields
@@ -18,6 +20,57 @@ const bookRead = document.querySelector("#bookRead");
 
 // Table for all books
 const booksTable = document.querySelector("#books");
+
+function inputValidation() {
+  const errorMessage = document.getElementById("errorMessage");
+  errorMessage.style.display = "none";
+
+  let isValid = true;
+
+  const fields = [
+    { id: "bookTitle", type: "text", validator: validateRequired },
+    { id: "bookAuthor", type: "text", validator: validateRequired },
+    { id: "bookPages", type: "number", validator: validatePages },
+  ];
+
+  fields.forEach((field) => {
+    const input = document.getElementById(field.id);
+    if (!field.validator(input.value)) {
+      isValid = false;
+      markFieldAsInvalid(input);
+    } else {
+      markFieldAsValid(input);
+    }
+  });
+
+  if (!isValid) {
+    errorMessage.style.display = "block";
+    return false;
+  } else {
+    console.log("Form is valid.");
+    return true;
+  }
+}
+
+function validateRequired(value) {
+  return value.trim() !== "";
+}
+
+// Validation function for Number of Pages
+function validatePages(value) {
+  const pages = Number(value);
+  return pages > 0;
+}
+
+// Mark field as invalid
+function markFieldAsInvalid(field) {
+  field.style.borderColor = "red";
+}
+
+// Mark field as valid
+function markFieldAsValid(field) {
+  field.style.borderColor = "";
+}
 
 class Book {
   constructor(title, author, pages, read) {
